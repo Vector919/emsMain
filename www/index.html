@@ -1,0 +1,445 @@
+<!doctype html>
+<html>
+    <head>
+      <meta charset="utf-8">
+  		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+
+            will need to lock down before publishing
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <!-- Bootstrap core CSS -->
+    		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+    		<!-- Custom styles for this template -->
+    		<link href="css/starter-template.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <title>myEMS</title>
+    </head>
+    <body onclick="$('.navbar-collapse').collapse('hide')">
+
+
+
+      <!-- Start Setup -->
+      <!-- Splash Screen -->
+      <div class="hidden" id="setup0">
+        <!-- collect info page -->
+        <form class="form-inline">
+
+          <object type="image/svg+xml" data="img/Icon2.svg" class="logo portrait">
+          <!--<img src="img/Icon2.svg" style="max-width:100%;padding-top:10px;" />-->
+          </object>
+          <div class="landscape">
+            <div class="bg-orange bar">
+              <object type="image/svg+xml" data="img/header.svg" class="logo">
+              <!--<img src="img/Icon2.svg" style="max-width:100%;padding-top:10px;" />-->
+              </object>
+            </div>
+          </div>
+          <br style="clear:both" />
+          <div class="DBresults"></div>
+          <div id="deviceready" class="container">
+              <div class="event listening" class="blink">
+                <p class="text-orange">Loading...</p>
+                <div class="loadingContainer blink"><!--
+                  <div class="loading">
+                  </div>
+                  <div class="loading-pulse">
+                  </div>
+               --><div class="loading loading--double">
+                  </div><!--
+             --></div>
+              </div>
+              <div class="event received">
+                <div class="form-group">
+                  <div id="splashError" style="color:#000;font-weight:bold"></div>
+                  <label for="name">Please enter your name:</label>
+                  <input type="text" class="form-control input-lg" id="name"
+                    name="usersname" placeholder="Your Name" />
+                  <label for="cellphone">
+                    Please enter your cellphone number:
+                  </label>
+                  <input type="tel" class="form-control input-lg" id="cellphone" name="userscellphone"
+                    value=""  placeholder="Phone Number" />
+                  <!-- add phone number mask -->
+                  <br />
+                  <a href="#setup1" class="btn btn-secondary btn-lg blink"
+                    onclick="app.setupAddOwnerInfo(function(){app.updateUserInfo($('#name').val(),$('#cellphone').val())})">
+                    Next
+                  </a>
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+
+
+
+      <!-- Setup the buttons -->
+      <div class="hidden" id="setup1">
+        <!-- some default alert options -->
+        <!-- custom alert message -->
+        <!-- revamp for reuse with editing and updating the buttons -->
+
+        <div class="bg-orange bar">
+          <object type="image/svg+xml" data="img/header.svg" class="logo">
+          <!--<img src="img/Icon2.svg" style="max-width:100%;padding-top:10px;" />-->
+          </object>
+        </div>
+        <br style="clear:both" />
+        <div class="container">
+          <div id="instructions">
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
+          <div class="row container" style="margin-bottom:10px;">
+            <div class="col-xs-5 text-right">
+              <b>Edit Message</b>
+            </div>
+            <div class="col-xs-7">
+            </div>
+          </div>
+          <div id="msgs">
+              <div class="col-md-12 text-center">Loading...</div>
+          </div>
+          <div id="msgs_temp" style="display:none;">
+                {{#messages}}
+                  <div class="row container"><!--
+                 --><div class="col-xs-5 vcenter text-right">
+                      <a href="#" class="btn btn-default btn-lg" onclick="app.editButton({{id}})" style="margin-bottom:10px;font-size:xx-large" data-msg="{{msg}}">
+                        {{emoji}}
+                      </a>
+                    </div><!--
+                 --><div class="col-xs-7 vcenter text-left">
+                      {{msg}}
+                    </div><!--
+                 --<div class="col-xs-3 vcenter">
+                      <a href="#" class="btn btn-default btn-lg"  style="margin-bottom:10px;">✏</a>
+                    </div><!--
+               --></div>
+                {{/messages}}
+          </div>
+          <br />
+          <div id="AddCustom">
+            <a href="#" class="btn btn-default btn-lg" onclick="startCustomMsg()">Add a Custom Button</a>
+          </div>
+          <br />
+          <div id="buttonsSetupPageNav" class="btn-group">
+            <a href="#setup0" class="btn btn-default btn-lg" onclick="previousPage()">Back</a><a href="#setup3" class="btn btn-secondary btn-lg" onclick="showPage(3)">Done</a>
+            <!-- js to send data along to DB, then load main page -->
+          </div>
+        </div>
+      </div>
+      <!-- add contacts to circle -->
+      <div class="hidden" id="setup2">
+        <!-- populated from backend or js -->
+        <!-- selected state could be visual with a checkbox type graphic or by changing the color of the row -->
+        <div class="bg-orange bar">
+          <object type="image/svg+xml" data="img/header.svg" class="logo">
+          <!--<img src="img/Icon2.svg" style="max-width:100%;padding-top:10px;" />-->
+          </object>
+        </div>
+        <br style="clear:both" />
+        <div class="container">
+          <div class="row">
+            <!-- needs to submit the contact into the msg obj and enable it if not enabled -->
+            <!-- edit emoji, edit message -->
+            <form class="form-inline" role="form">
+              <div class="form-group">
+                <label for="setup_edit_emoji">
+                  Select Emoji:
+                </label>
+
+                <input class="form-control input-lg text-center" type="text" id="setup_edit_emoji" placeholder="" /> <!-- turn into button to select emoji -->
+
+                <label for="setup_edit_message">
+                  Write Message:
+                </label>
+
+                <input class="form-control input-lg text-center" type="text" id="setup_edit_message" placeholder="I'm here!" />
+
+              </div>
+            </form>
+            <input type="hidden" id="setup_edit_id" />
+            <!-- contacts selected -->
+            <div>Your circle:</div>
+            <div id="selectedContacts"><b>Search for a contact to get started...</b></div>
+            <div id="selectedContacts_temp" style="display:none">
+              <!-- if they have an image, display it above name, else just show name -->
+              {{#contacts}}
+                  <div class="row"><!--
+                 --><div class="col-xs-2 vcenter">
+                          <img src="{{img}}" style="max-height:50px;margin:5px;" />
+                          {{^img}}
+                            <img src="img/nopic.png" height="50" width="50" style="margin:5px;" />
+                          {{/img}}
+                    </div><!--
+                 --><div class="col-xs-8 vcenter">
+                        {{name}}
+                    </div><!--
+                 --><div class="col-xs-2 vcenter">
+                      <a href="#"  onclick="app.removeSelectedContact({{id}})" class="btn btn-danger btn-lg">X</a>
+                    </div><!--
+               --></div>
+              {{/contacts}}
+              <br />
+              <br />
+            </div>
+          </div>
+
+          <input type="search" id="contactSearch" class="form-control" disabled placeholder="Search by Name or Number" /> <!-- fade in? -->
+          <br />
+          <div class="text-center" id="contacts">
+            <div class="row text-center">
+              <!-- add contacts template -->
+              <div class="loadingContainer"><!--
+                <div class="loading">
+                </div>
+                <div class="loading-pulse">
+                </div>
+             --><div class="loading loading--double">
+                </div><!--
+           --></div>
+            </div>
+          </div>
+          <div id="contacts_temp" style="display:none;">
+              {{#contacts}}
+                  <div class="row" id="{{id}}"><!--
+                 --><div class="col-xs-2 vcenter" onclick="app.selectContact({{id}})">
+                          <img src="{{photos.0.value}}" class="userImg" style="max-height:50px;margin:5px;" />
+                          {{^photos}}
+                            <img src="img/nopic.png" height="50" width="50" style="margin:5px;" />
+                          {{/photos}}
+                    </div><!--
+                 --><div class="col-xs-4 vcenter userName" onclick="app.selectContact({{id}})">
+                        {{displayName}}
+                    </div><!--
+                 --><div class="col-xs-6 vcenter">
+                      <select class="form-control phoneNumber">
+                        {{#phoneNumbers}}
+                          <option>{{phone}}:{{type}}</option>
+                        {{/phoneNumbers}}
+                      </select>
+                    </div><!--
+               --></div>
+              {{/contacts}}
+          </div>
+        </div>
+
+        <footer class="footerNav">
+                <a href="#setup1" class="btn btn-secondary btn-lg blink vcenter btn-block pull-right" onclick="app.updateButton()">Update</a>
+                <a href="#" class="btn btn-default vcenter btn-lg btn-block pull-left" onclick="app.cancelUpdateButton()">Cancel</a>
+        </footer>
+
+      </div>
+
+
+      <!-- grab gps coord permissions if they enabled it -->
+      <div class="container hidden" id="setup3">
+
+        <form class="starter-template">
+          <label for="gps"><h3>Share Location</h3></label><br />
+
+          <div id="currentLocation" class="bg-info blink">Retrieving location</div>
+
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary btn-lg active" onclick="app.setGPS(true)">
+              <input type="radio" name="gps" id="option1" autocomplete="off" checked /> On
+            </label>
+            <label class="btn btn-primary btn-lg" onclick="app.setGPS(false)">
+              <input type="radio" name="gps" id="option2" autocomplete="off" /> Off
+            </label>
+          </div>
+          <a href="#" class="hidden debug" onclick="app.gpsGetCurrentLocation()">updateGPS</a>
+          <input type="hidden" name="coord" value="" /> <!-- populated with backend or JS code (unneeded if not pulling via html5 apis) -->
+          <br />
+          <br />
+          <br />
+          <br />
+          <div class="btn-group">
+            <a href="#setup2" class="btn btn-primary btn-lg" onclick="showPage(1)">Back</a><a href="#Main" class="btn btn-secondary btn-lg blink" onclick="app.completeSetup()">Complete</a>
+          </div>
+        </form>
+
+      </div>
+      <!-- End Setup -->
+
+
+<!--
+Pages that might become part of setup
+-->
+
+<div id="addContacts" class="hidden">
+  <div class="bg-orange bar">
+    <object type="image/svg+xml" data="img/header.svg" class="logo">
+    <!--<img src="img/Icon2.svg" style="max-width:100%;padding-top:10px;" />-->
+    </object>
+  </div>
+  <br style="clear:both" />
+  <h3>Update Contact</h3>
+  <br />
+  <div id="editContactSingle" class="container"></div>
+  <div id="editContactSingle_temp" class="container">
+    <div class="row">
+      <div class="col-xs-6 vcenter">
+        <img src="img/nopic.png" src="{{img}}" style="height:52px;width:52px;margin:20px">
+        {{name}}
+      </div><!--
+   --><div class="col-xs-6 vcenter">
+        <a href="#" class="btn btn-danger">Remove Contact</a>
+      </div>
+    </div>
+
+    <!-- insert the add select stuff from setup -->
+  </div>
+</div>
+
+<div id="editButton" class="hidden">
+  <div class="bg-orange bar">
+    <object type="image/svg+xml" data="img/header.svg" class="logo">
+    <!--<img src="img/Icon2.svg" style="max-width:100%;padding-top:10px;" />-->
+    </object>
+  </div>
+  <br style="clear:both" />
+  <h3>Update a Button</h3>
+  <div id="editButtonSingle" class="container"></div>
+  <div id="editButtonSingle_temp" style="display:none">
+    <!--<a href="#" class="btn btn-default btn-lg" onclick="emojiSelector({{id}})" style="margin-bottom:10px;font-size:xx-large" data-msg="{{msg}}">
+      {{emoji}}
+    </a>-->
+    <input type="text" id="emoji{{id}}" class="form-control input-lg" placeholder="Button Emoji" />
+    <input type="text" id="msg{{id}}" class="form-control input-lg"  placeholder="Write a Message"  />
+    <br />
+    <br />
+    <br />
+    <h4>My Group</h4>
+    <div class="row">
+      {{#contacts}}
+        <div class="col-xs-3">
+          <a href="#" class="btn btn-default">
+            <img src="{{contacts.img}}" /><br />
+            {{contacts.name}}
+          </a>
+        </div>
+      {{/contacts}}
+      <div class="col-xs-3">
+        <a href="#" class="btn btn-secondary">
+          <img src="img/plus.png" /><br />
+          Add a Contact
+        </a>
+      </div>
+    </div>
+    <br />
+    <br />
+    <footer class="footerNav">
+            <a href="#setup1" class="btn btn-secondary btn-lg blink vcenter btn-block pull-right" onclick="app.updateButton()">Update</a>
+            <a href="#" class="btn btn-default vcenter btn-lg btn-block pull-left" onclick="app.cancelUpdateButton()">Cancel</a>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
+      <!-- main pages -->
+      <!-- convert this top bar into bottom icon bar -->
+      <div id="main" class="hidden">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <img class="navbar-brand" src="img/Icon3.svg" style="max-height:100%;float:left">
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav navbar-right" id="pageTabs" role="tablist">
+                <li class="active"><a href="#home">Home</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a id="ownersName" href="#account">OwnerName</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+        <!-- add on below container click/tap/touch closes menu -->
+        <div class="container tab-content">
+
+          <!-- Home -->
+          <div class="tab-pane active fade in" role="tabpanel" id="home">
+            <div class="starter-template">
+              <div id="homeScreenButtons" class="row"></div>
+              <div id="homeScreenButtons_temp" style="display:none">
+                {{#messages}}
+                  {{#contacts.0}}
+                  <a href="#" class="btn btn-default btn-lg" onclick="app.buttonAction({{id}})" style="margin-bottom:10px;font-size:xx-large" data-msg="{{msg}}">
+                    {{emoji}}
+                  </a>
+                  {{/contacts.0}}
+                {{/messages}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings -->
+          <div class="starter-template tab-pane fade" role="tabpanel" id="settings">
+            <h1>Settings</h1>
+            <!-- show all buttons (including ones without contacts) -->
+            <a href="#" class="btn btn-secondary" onclick="showPage(1)">Edit Buttons</a> <br /><br />
+            <a href="#" class="btn btn-danger" id="defaultMsgs" onclick="app.restoreDefaults()">Restore Defaults</a>
+
+            <a href="#" class="btn btn-default hidden debug" onclick="app.completeSetup(false)">Restart Setup</a>
+          </div>
+
+
+          <!-- Owner Info -->
+          <div class="starter-template tab-pane fade" role="tabpanel" id="account">
+            <h1>Account Information</h1>
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputEmail3">Name</label>
+                <input type="text" class="form-control" id="ownerName" placeholder="OwnerName" oninput="app.updateUserName(this.value)" onblur="app.completeSetup()">
+              </div>
+              <br />
+              <div class="form-group">
+                <label class="sr-only" for="exampleInputPassword3">Phone Number</label>
+                <input type="tel" class="form-control" id="ownerPhoneNumber" placeholder="OwnerPhoneNumber" oninput="app.updateUserPhoneNumber(this.value)" onblur="app.completeSetup()">
+              </div>
+            </form>
+            <a href="#" class="btn btn-default hidden debug" onclick="app.loadDataObjFromDB()">Show DB Records</a>
+            <div class="DBresults"></div>
+          </div>
+        </div><!-- /.container -->
+
+
+      </div>
+
+          <script src="js/jquery.min.js"></script>
+          <script src="js/jquery.mask.min.js"></script>
+          <script src="js/mustache.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+
+          <script type="text/javascript" src="cordova.js"></script>
+          <!-- a data abstract layer ? -->
+          <script type="text/javascript" src="js/page.js"></script>
+          <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

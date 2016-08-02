@@ -1,0 +1,207 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#fff;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+
+.forceShow {
+  display:block !important;
+}
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    color:#000;
+    background-color:#fff;
+    display:block;
+}
+
+.event.received {
+    background-color:#fff;
+    display:none; /* set to display: none; whenever building for device */
+    /* color: #000; //makes the labels visible */
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes pulse {
+  50% {
+    background: white;
+  }
+}
+@keyframes pulse {
+  50% {
+    background: white;
+  }
+}
+html, body {
+  height: 100%;
+}
+
+.loadingContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.loading {
+  border-radius: 50%;
+  width: 34px;  /* 24 */
+  height: 34px; /* 24 */
+  border: 0.25rem solid rgba(255, 127, 42, 0.75);
+  border-top-color: white;
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+}
+.loading--double {
+  border-style: double;
+  border-width: .5rem;
+}
+
+.loading-pulse {
+  position: relative;
+  width: 6px;
+  height: 24px;
+  background: rgba(225, 127, 42, 0.75);
+  -webkit-animation: pulse 750ms infinite;
+          animation: pulse 750ms infinite;
+  -webkit-animation-delay: 250ms;
+          animation-delay: 250ms;
+}
+.loading-pulse:before, .loading-pulse:after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 16px;
+  width: 6px;
+  background: rgba(255, 127, 42, 0.75);
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-animation: pulse 750ms infinite;
+          animation: pulse 750ms infinite;
+}
+.loading-pulse:before {
+  left: -12px;
+}
+.loading-pulse:after {
+  left: 12px;
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
+}
+.btn-secondary {
+  color: #fff;
+  background-color: #f05a26;
+  border-color: #f05a26;
+}
+.bg-orange{
+  background-color: #f05a26;
+}
+.text-orange{
+  color: #f05a26;
+}
+.bar{
+  width:100%;
+  height:1.2em;
+  margin-bottom:.2em;
+}
+.bar .logo {
+  width:30%;
+  margin:.1em 1em;
+  float:right;
+}
+
+.footerNav {
+  position:relative;
+  bottom: -3em;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+/* portrait */
+@media screen and (orientation:portrait) {
+	/* portrait-specific styles */
+  .portrait {
+    display:block;
+  }
+  .landscape {
+    display:none;
+  }
+}
+/* landscape */
+@media screen and (orientation:landscape) {
+	/* landscape-specific styles */
+  .portrait {
+    display:none;
+  }
+  .landscape {
+    display:block;
+  }
+}

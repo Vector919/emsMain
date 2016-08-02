@@ -1,0 +1,99 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+html	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^<html>$/;"	function	line:2
+head	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    <head>$/;"	function	line:3
+meta	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <meta charset="utf-8">$/;"	function	line:4
+meta	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^  		<meta http-equiv="X-UA-Compatible" content="IE=edge">$/;"	function	line:5
+meta	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">$/;"	function	line:6
+meta	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">$/;"	function	line:16
+meta	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <meta name="format-detection" content="telephone=no">$/;"	function	line:18
+meta	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <meta name="msapplication-tap-highlight" content="no">$/;"	function	line:19
+link	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    		<link href="css\/bootstrap.min.css" rel="stylesheet">$/;"	function	line:21
+link	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    		<link href="css\/ie10-viewport-bug-workaround.css" rel="stylesheet">$/;"	function	line:24
+link	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    		<link href="css\/starter-template.css" rel="stylesheet">$/;"	function	line:27
+link	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <link rel="stylesheet" type="text\/css" href="css\/index.css">$/;"	function	line:30
+title	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <title>Redlert<\/title>$/;"	function	line:32
+body	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    <body>$/;"	function	line:34
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <div class="container hidden" id="setup0">$/;"	function	line:38
+form	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <form class="starter-template form-inline">$/;"	function	line:40
+img	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <img src="img\/logo.png" style="max-width:100%" \/>$/;"	function	line:41
+br	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <br \/>$/;"	function	line:42
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div id="deviceready">$/;"	function	line:43
+p	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <p class="event listening" class="blink">Connecting to Device<\/p>$/;"	function	line:44
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <div class="event received">$/;"	function	line:45
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <div class="form-group">$/;"	function	line:46
+label	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                  <label for="name">Please enter your name:<\/label>$/;"	function	line:47
+input	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                  <input type="text" class="form-control input-lg" id="name" name="Username" placeholder="Jane Smith" \/><!-- this could be potentially pulled from the phone making this page unnecessary. -->$/;"	function	line:48
+input	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                  <input type="hidden" name="cellphone" value="" \/> <!-- populated with backend or JS code -->$/;"	function	line:49
+br	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                  <br class="visible-xs-block" \/>$/;"	function	line:50
+a	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                  <a href="#setup1" class="btn btn-primary btn-lg blink" onclick="nextPage()">Next<\/a>$/;"	function	line:51
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <div class="container hidden" id="setup1">$/;"	function	line:59
+table	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <table class="table table-hover">$/;"	function	line:62
+thead	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <thead>$/;"	function	line:63
+tr	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <tr>$/;"	function	line:64
+td	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <td>$/;"	function	line:65
+h	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <h2>Add contacts to your circle<\/h2><br \/>$/;"	function	line:66
+input	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <input type="search" id="contactSearch" class="form-control" placeholder="Name or Number" \/>$/;"	function	line:67
+tbody	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <tbody class="text-center" id="contacts">$/;"	function	line:71
+tr	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <tr>$/;"	function	line:72
+td	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <td>$/;"	function	line:73
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <div class="row">$/;"	function	line:79
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="text-center">$/;"	function	line:80
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <div class="btn-group">$/;"	function	line:81
+a	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <a href="#setup0" class="btn btn-primary btn-lg" onclick="previousPage()">Back<\/a><a href="#setup2" class="btn btn-primary btn-lg blink" onclick="nextPage()">Next<\/a>$/;"	function	line:82
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <div class="container hidden" id="setup2">$/;"	function	line:87
+form	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <form class="starter-template">$/;"	function	line:89
+label	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <label for="gps"><h3>Share Location<\/h3><\/label><br \/>$/;"	function	line:90
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div id="currentLocation" class="bg-info blink">Retrieving location<\/div>$/;"	function	line:92
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="btn-group" data-toggle="buttons">$/;"	function	line:94
+label	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <label class="btn btn-primary btn-lg active">$/;"	function	line:95
+input	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <input type="radio" name="gps" id="option1" autocomplete="off" checked \/> On$/;"	function	line:96
+label	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <label class="btn btn-primary btn-lg">$/;"	function	line:98
+input	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <input type="radio" name="gps" id="option2" autocomplete="off" \/> Off$/;"	function	line:99
+input	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <input type="hidden" name="coord" value="" \/> <!-- populated with backend or JS code (unneeded if not pulling via html5 apis) -->$/;"	function	line:102
+br	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <br \/>$/;"	function	line:103
+br	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <br \/>$/;"	function	line:104
+br	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <br \/>$/;"	function	line:105
+br	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <br \/>$/;"	function	line:106
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="btn-group">$/;"	function	line:107
+a	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <a href="#setup1" class="btn btn-primary btn-lg" onclick="previousPage()">Back<\/a><a href="#setup3" class="btn btn-primary btn-lg blink" onclick="nextPage()">Next<\/a>$/;"	function	line:108
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <div class="container hidden" id="setup3">$/;"	function	line:114
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <div class="starter-template">$/;"	function	line:117
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="btn-group">$/;"	function	line:119
+a	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <a href="#setup2" class="btn btn-primary btn-lg" onclick="previousPage()">Back<\/a><a href="#main" class="btn btn-primary btn-lg blink" onclick="nextPage()">Complete<\/a>$/;"	function	line:120
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^      <div id="main" class="hidden">$/;"	function	line:128
+nav	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <nav class="navbar navbar-inverse navbar-fixed-top">$/;"	function	line:129
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="container">$/;"	function	line:130
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <div class="navbar-header">$/;"	function	line:131
+button	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">$/;"	function	line:132
+span	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <span class="sr-only">Toggle navigation<\/span>$/;"	function	line:133
+span	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <span class="icon-bar"><\/span>$/;"	function	line:134
+span	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <span class="icon-bar"><\/span>$/;"	function	line:135
+span	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <span class="icon-bar"><\/span>$/;"	function	line:136
+a	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <a class="navbar-brand" href="#">Redlert2<\/a>$/;"	function	line:138
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <div id="navbar" class="collapse navbar-collapse">$/;"	function	line:140
+ul	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^              <ul class="nav navbar-nav navbar-right" id="pageTabs" role="tablist">$/;"	function	line:141
+li	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <li class="active"><a href="#home">Home<\/a><\/li>$/;"	function	line:142
+li	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <li><a href="#settings">Settings<\/a><\/li>$/;"	function	line:143
+li	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^                <li><a href="#account">OwnerName<\/a><\/li>$/;"	function	line:144
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <div class="container tab-content">$/;"	function	line:150
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="starter-template tab-pane active fade in" role="tabpanel" id="home">$/;"	function	line:153
+h	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <h1>Buttons<\/h1>$/;"	function	line:154
+p	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <p class="lead">Here<\/p>$/;"	function	line:155
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="starter-template tab-pane fade" role="tabpanel" id="settings">$/;"	function	line:159
+h	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <h1>Settings<\/h1>$/;"	function	line:160
+p	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <p class="lead">Here<\/p>$/;"	function	line:161
+div	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^          <div class="starter-template tab-pane fade" role="tabpanel" id="account">$/;"	function	line:166
+h	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <h1>Account\/Owner Info CRUD<\/h1>$/;"	function	line:167
+p	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^            <p class="lead">Here<\/p>$/;"	function	line:168
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <script type="text\/javascript" src="cordova.js"><\/script>$/;"	function	line:177
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <script type="text\/javascript" src="js\/index.js"><\/script>$/;"	function	line:178
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <script src="https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.11.3\/jquery.min.js"><\/script>$/;"	function	line:179
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    		<script>window.jQuery || document.write('<script src="js\/jquery.min.js"><\\\/script>')<\/script>$/;"	function	line:180
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    		<script src="js\/bootstrap.min.js"><\/script>$/;"	function	line:181
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^    		<script src="js\/ie10-viewport-bug-workaround.js"><\/script>$/;"	function	line:183
+script	C:\Users\Matt\Documents\cordovaApp\hello\www\index.html	/^        <script type="text\/javascript" src="js\/page.js"><\/script>$/;"	function	line:184
