@@ -1,3 +1,14 @@
+fonts/*
+*.tags*
+node_modules/*
+platforms/*
+plugins/*
+SSK/*
+
+*.apk
+*.zip
+*.7z
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
