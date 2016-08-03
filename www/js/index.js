@@ -1,4 +1,4 @@
-var DEBUG_MODE = true;
+var DEBUG_MODE = false;
 
 var dataOBJ = {}; // dataObj from file if exists
 //store initial default messages in seperate file (loadthem)
@@ -84,7 +84,7 @@ var app = {
           $(".event.received").addClass("forceShow");
           $(".debug").addClass("forceShow");
         }
-        app.receivedEvent('deviceready');
+        setTimeout(function(){app.receivedEvent('deviceready');}, 1000);
 
     },
     // Update DOM on a Received Event
@@ -447,7 +447,7 @@ var app = {
       setup = typeof setup !== undefined ?  setup : true;
       //verify that there is at least owner.cellnumber set and at least 1 button setup
       dataOBJ.messages=defaultMsgs.messages;
-      dataOBJ.setup=setup;
+      dataOBJ.setup=true;
       //store dataOBJ
       //terrible code, fix with multifunctions and callbacks
       var myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
@@ -482,6 +482,7 @@ var app = {
 
       updateUserName();
       updateUserPhoneNumber();
+      $('.navbar-nav a[href="#home"]').tab('show');
       showPage(pages.length-1);
 
     },
@@ -506,7 +507,8 @@ var app = {
 
               defaultMsgs.messages=dataOBJ.messages;
               app.loadMsgs();
-              if(call){call();}
+              setTimeout(function(){if(call){call();}}, 500);
+
             },
             function(error){if(call){call();}console.log('Not Setup');}
           );
@@ -518,8 +520,19 @@ var app = {
       }
     );
   },
-  buttonAction: function(id){
-    alert("Message "+id+" would like to send a message.");
+  buttonAction: function(msgID){
+    var id;
+    for(i=0; i<defaultMsgs.messages.length;++i){
+      if(defaultMsgs.messages[i].id == msgID){
+        id=i;
+      }
+    }
+    //defaultMsgs.messages[id];
+    //.id
+    //.emoji
+    //.msg
+    //.contacts
+    alert("Message "+id+" would like to send a message."); // AJAX request to server to send message
   }
 
 
