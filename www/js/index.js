@@ -1,7 +1,7 @@
-var DEBUG_MODE = false;
-
+﻿var DEBUG_MODE = false;
+var backendURL = "";
 var dataOBJ = {}; // dataObj from file if exists
-//store initial default messages in seperate file (loadthem)
+//store initial default messages in separate file (load them)
 var defaultMsgs = {
   "messages" : [
     {
@@ -532,7 +532,28 @@ var app = {
     //.emoji
     //.msg
     //.contacts
-    alert("Message "+id+" would like to send a message."); // AJAX request to server to send message
+    //alert("Message "+id+" would like to send a message."); // AJAX request to server to send message
+    var message = defaultMsgs[id];
+    var phonenums=[];
+    for(var i=0; i<message.contacts.length; ++i){
+      phonenums.push(message.contacts[i].cellphone);
+    }
+    var request={"messsage":message.msg,"contacts":phonunums};
+    $.ajax({
+        url: backendURL+"notify_sms",
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: request,
+        success: function( data, textStatus, jQxhr ){
+          if(data.status==202){
+            $('#response').html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was successfully sent.</div>");
+          }
+        },
+        error: function( jqXhr, textStatus, errorThrown ){
+            console.log( errorThrown );
+        }
+    });
   }
 
 
