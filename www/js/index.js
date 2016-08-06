@@ -1,5 +1,5 @@
 ﻿var DEBUG_MODE = false;
-var backendURL = "";
+var backendURL = "http://localhost/";
 var dataOBJ = {}; // dataObj from file if exists
 //store initial default messages in separate file (load them)
 var defaultMsgs = {
@@ -507,6 +507,8 @@ var app = {
 
               defaultMsgs.messages=dataOBJ.messages;
               app.loadMsgs();
+              app.getContacts();
+              app.gpsGetCurrentLocation();
               setTimeout(function(){if(call){call();}}, 500);
 
             },
@@ -521,6 +523,7 @@ var app = {
     );
   },
   buttonAction: function(msgID){
+    app.gpsGetCurrentLocation();
     var id;
     for(i=0; i<defaultMsgs.messages.length;++i){
       if(defaultMsgs.messages[i].id == msgID){
