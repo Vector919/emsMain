@@ -1,5 +1,5 @@
 ﻿var DEBUG_MODE = false;
-var backendURL = "http://localhost/";
+var backendURL = "http://159.203.98.25:3000/";
 var dataOBJ = {}; // dataObj from file if exists
 //store initial default messages in separate file (load them)
 var defaultMsgs = {
@@ -541,7 +541,7 @@ var app = {
     for(var i=0; i<message.contacts.length; ++i){
       phonenums.push(message.contacts[i].cellphone);
     }
-    var request={"messsage":message.msg,"contacts":phonunums};
+    var request={"message":dataOBJ.owner.username+": "+message.msg+" Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")","contacts":phonunums};
     $.ajax({
         url: backendURL+"notify_sms",
         dataType: 'json',
