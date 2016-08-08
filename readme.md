@@ -4,6 +4,7 @@ myEMS
 To do:
 * Add Cancel Button to Home Screen
 * Require Pin to Cancel
+* Google maps api reverse geolocation lookup
 * Add Emoji Selection Page (platform specific)
 * Re-factor Code into jQuery (Cleaning up Orphaned Functions)
 * Increase the performance of the code

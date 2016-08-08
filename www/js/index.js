@@ -1,4 +1,4 @@
-﻿var DEBUG_MODE = false;
+﻿var DEBUG_MODE = true;
 var backendURL = "http://159.203.98.25:3000/";
 var dataOBJ = {}; // dataObj from file if exists
 //store initial default messages in separate file (load them)
@@ -545,6 +545,8 @@ var app = {
 						+message.msg
 						+" Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")",
 						"contacts":phonenums};
+						
+	
     $.ajax({
         url: backendURL+"notify_sms",
         dataType: 'json',
@@ -555,9 +557,18 @@ var app = {
           if(data.status==202){
             $('#response').html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was successfully sent.</div>");
           }
+		  else{
+			$('#response').html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was not successfully sent.</div>");
+			if(DEBUG_MODE){
+				$('#response').html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+data+"</div>");
+			}
+		}
         },
         error: function( jqXhr, textStatus, errorThrown ){
             console.log( errorThrown );
+			if(DEBUG_MODE){
+				$('#response').html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+errorThrown+"</div>");
+			}
         }
     });
   }
