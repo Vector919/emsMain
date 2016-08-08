@@ -541,7 +541,10 @@ var app = {
     for(var i=0; i<message.contacts.length; ++i){
       phonenums.push(message.contacts[i].cellphone);
     }
-    var request={"message":dataOBJ.owner.username+": "+message.msg+" Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")","contacts":phonunums};
+    var request={"message":(dataOBJ.owner.username!=='undefined'?dataOBJ.owner.username:'A friend of yours who forgot to enter their name')+": "
+						+message.msg
+						+" Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")",
+						"contacts":phonenums};
     $.ajax({
         url: backendURL+"notify_sms",
         dataType: 'json',
