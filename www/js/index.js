@@ -2,8 +2,61 @@
 var backendURL = "http://159.203.98.25:3000/";
 var dataOBJ = {}; // dataObj from file if exists
 //store initial default messages in separate file (load them)
+if(DEBUG_MODE){
+  dataOBJ = {
+    "owner" : {
+      "username" : "Jerry Smith",
+      "cellnumber" : "7258695545"
+    },
+    "coords":{
+      "latitude" : 71.2555,
+      "longitude" : 80.5555
+    }
+  };
+}
+/*
+sample object
+*
+var dataOBJ = {
+  "owner" : {
+    "username" : "Jerry Smith",
+    "cellnumber" : "7258695545"
+  },
+  "coords":{
+    "latitude" : 71.2555,
+    "longitude" : 80.5555
+  }
+  "messages" : [
+    {
+      "id" : 42,
+      "msg" : "What is the meaning of life?",
+      "emoji" : "😁",
+      "contacts": [
+        {
+          "name": "BFF",
+          "cellphone": "1238675309",
+          "img" : "content://com.android.contacts/contacts/5/photo" //optional img
+        }
+      ]
+    }
+  ]
+};
+*/
+
 var defaultMsgs = {
   "messages" : [
+    //{
+    //   "id" : 42,
+    //   "msg" : "What is the meaning of life?",
+    //   "emoji" : "😁",
+    //   "contacts": [
+    //     {
+    //       "name": "BFF",
+    //       "cellphone": "123456789",
+    //       "img" : "content://com.android.contacts/contacts/5/photo" //optional img
+    //     }
+    //   ]
+    // },
     {
       "id"  : 0,
       "msg" : "Come to me, I don't feel safe.",
@@ -536,17 +589,18 @@ var app = {
     //.msg
     //.contacts
     //alert("Message "+id+" would like to send a message."); // AJAX request to server to send message
-    var message = defaultMsgs[id];
+    var message = defaultMsgs.messages[id];
     var phonenums=[];
     for(var i=0; i<message.contacts.length; ++i){
       phonenums.push(message.contacts[i].cellphone);
     }
-    var request={"message":(dataOBJ.owner.username!=='undefined'?dataOBJ.owner.username:'A friend of yours who forgot to enter their name')+": "
-						+message.msg
-						+" Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")",
+    var request={"message":
+            (dataOBJ.owner.username!=='undefined'?dataOBJ.owner.username:'A friend of yours who forgot to enter their name')+": " +
+            message.msg +
+            " Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")",
 						"contacts":phonenums};
-						
-	
+
+
     $.ajax({
         url: backendURL+"notify_sms",
         dataType: 'json',
@@ -554,6 +608,7 @@ var app = {
         contentType: 'application/json',
         data: request,
         success: function( data, textStatus, jQxhr ){
+          console.log(data);
           if(data.status==202){
             $('#response').html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was successfully sent.</div>");
           }
