@@ -603,7 +603,7 @@ var app = {
     var request={
       message:(dataOBJ.owner.username!==undefined?dataOBJ.owner.username.toString():"From a friend")+": " +
             message.msg +
-            "\n Location:\n\tlatitude("+dataOBJ.coords.latitude+")\n\tlongitude("+dataOBJ.coords.longitude+")",
+            "\n Location:\n\thttps://www.google.com/maps/place/"+dataOBJ.coords.latitude+","+dataOBJ.coords.longitude+"",
 						contacts:phonenums
     };
     if(DEBUG_MODE){
