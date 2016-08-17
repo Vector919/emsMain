@@ -25,7 +25,7 @@ var dataOBJ = {
   "coords":{
     "latitude" : 71.2555,
     "longitude" : 80.5555
-  }
+  },
   "messages" : [
     {
       "id" : 42,
@@ -40,19 +40,19 @@ var dataOBJ = {
       ]
     }
   ]
-};
+};/*
 */
 
 var defaultMsgs = {
   "messages" : [
-    //{
+    // {
     //   "id" : 42,
     //   "msg" : "What is the meaning of life?",
     //   "emoji" : "😁",
     //   "contacts": [
     //     {
     //       "name": "BFF",
-    //       "cellphone": "123456789",
+    //       "cellphone": "3213213222",
     //       "img" : "content://com.android.contacts/contacts/5/photo" //optional img
     //     }
     //   ]
@@ -562,6 +562,7 @@ var app = {
               app.loadMsgs();
               app.getContacts();
               app.gpsGetCurrentLocation();
+              //alert(JSON.stringify(defaultMsgs.messages));
               setTimeout(function(){if(call){call();}}, 500);
 
             },
@@ -578,7 +579,7 @@ var app = {
   buttonAction: function(msgID){
     app.gpsGetCurrentLocation();
     var id;
-    for(i=0; i<defaultMsgs.messages.length;++i){
+    for(i=0; i < defaultMsgs.messages.length;++i){
       if(defaultMsgs.messages[i].id == msgID){
         id=i;
       }
@@ -589,42 +590,56 @@ var app = {
     //.msg
     //.contacts
     //alert("Message "+id+" would like to send a message."); // AJAX request to server to send message
+
     var message = defaultMsgs.messages[id];
     var phonenums=[];
+    if(DEBUG_MODE){alert("The defaultMsgs.messages["+id+"] about to be sent...");alert(defaultMsgs.messages[id]);}
     for(var i=0; i<message.contacts.length; ++i){
-      phonenums.push(message.contacts[i].cellphone);
+      var num = message.contacts[i].cellphone.split(":")[0]; //split on : grab first part of array is b/c the phone numbers are stored with :work, :home, ...ect
+      if(num.length<11){num="1"+num;}
+      phonenums.push(num*1);
     }
-    var request={"message":
-            (dataOBJ.owner.username!=='undefined'?dataOBJ.owner.username:'A friend of yours who forgot to enter their name')+": " +
+    if(DEBUG_MODE){alert("Contacts: "+phonenums);}
+    var request={
+      message:(dataOBJ.owner.username!==undefined?dataOBJ.owner.username.toString():"From a friend")+": " +
             message.msg +
-            " Location: latitude("+dataOBJ.coords.latitude+") longitude("+dataOBJ.coords.longitude+")",
-						"contacts":phonenums};
-
-
+            "\n Location:\n\tlatitude("+dataOBJ.coords.latitude+")\n\tlongitude("+dataOBJ.coords.longitude+")",
+						contacts:phonenums
+    };
+    if(DEBUG_MODE){
+      alert("Request to be sent...");
+      alert(JSON.stringify(request));
+      alert("About to do ajax requst...");
+    }
     $.ajax({
         url: backendURL+"notify_sms",
         dataType: 'json',
         type: 'post',
         contentType: 'application/json',
-        data: request,
+        data: JSON.stringify(request), //need to stringify for the server to accept it
         success: function( data, textStatus, jQxhr ){
           console.log(data);
-          if(data.status==202){
+          if(data!==undefined&&data!==''&&data.status==202){
             $('#response').html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was successfully sent.</div>");
           }
-		  else{
-			$('#response').html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was not successfully sent.</div>");
-			if(DEBUG_MODE){
-				$('#response').html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+data+"</div>");
-			}
-		}
+      		else {
+      			$('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was not successfully sent.</div>");
+      			if(DEBUG_MODE){
+      				$('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+data+"</div>");
+      			}
+      		}
         },
         error: function( jqXhr, textStatus, errorThrown ){
-            console.log( errorThrown );
-			if(DEBUG_MODE){
-				$('#response').html("<div class='alert alert-warning alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+errorThrown+"</div>");
-			}
-        }
+            console.log( errorThrown + textStatus + JSON.stringify(jqXhr));
+      			if(DEBUG_MODE){
+      				$('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Error thown: "+errorThrown+"<br />"+JSON.stringify(jqXhr)+"</div>");
+      			}
+            else{
+              $('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+(errorThrown?errorThrown:"Undefined Error, make sure GPS is enabled and you are connected to the internet")+"</div>");
+            }
+        },
+        fail: function(){alert("CORS error");}
+
     });
   }
 

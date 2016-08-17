@@ -390,11 +390,9 @@ Pages that might become part of setup
               <div id="homeScreenButtons" class="row"></div>
               <div id="homeScreenButtons_temp" style="display:none">
                 {{#messages}}
-                  {{#contacts.0}}
-                  <a href="#" class="btn btn-default btn-lg" onclick="app.buttonAction({{id}})" style="margin-bottom:10px;font-size:xx-large" data-msg="{{msg}}">
+                  <a href="#" class="btn btn-default btn-lg" onclick="app.buttonAction({{id}})" style="margin-bottom:10px;font-size:xx-large;{{^contacts.0}}display:none;{{/contacts.0}}" data-msg="{{msg}}">
                     {{emoji}}
                   </a>
-                  {{/contacts.0}}
                 {{/messages}}
               </div>
             </div>
