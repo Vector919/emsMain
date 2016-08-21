@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.hello" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.jetcs.myems" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>myEMS</name>
 
     <description>
         MyEMS
     </description>
 
-    <author email="author@yourwebsite.io" href="http://yourwebsite,io">
-        Author
+    <author email="info@jetcs.com" href="http://jetcs,com">
+        JetTech
     </author>
 
     <icon src="www/img/res/mdpi.png" />

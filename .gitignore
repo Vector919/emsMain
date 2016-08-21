@@ -5,6 +5,9 @@ platforms/*
 plugins/*
 SSK/*
 
+.idea/
+out/
+
 *.apk
 *.zip
 *.7z

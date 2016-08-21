@@ -1,4 +1,4 @@
-﻿var DEBUG_MODE = true;
+﻿var DEBUG_MODE = false;
 var backendURL = "http://159.203.98.25:3000/";
 var dataOBJ = {}; // dataObj from file if exists
 //store initial default messages in separate file (load them)
