@@ -21,13 +21,17 @@
         <meta name="msapplication-tap-highlight" content="no">
         <!-- Bootstrap core CSS -->
     		<link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
-    		<!-- Custom styles for this template -->
+        <link href="assets/css/nanoscroller.css" rel="stylesheet">
+        <link href="assets/css/emoji.css" rel="stylesheet">
+
+      	<!-- Custom styles for this template -->
     		<link href="css/starter-template.css" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="css/index.css">
 
-        <title>myEMS</title>
+        <title>#EMS</title>
     </head>
     <body onclick="$('.navbar-collapse').collapse('hide')">
 
@@ -164,9 +168,11 @@
                 <label for="setup_edit_emoji">
                   Select Emoji:
                 </label>
-
-                <input class="form-control input-lg text-center" type="text" id="setup_edit_emoji" placeholder="" /> <!-- turn into button to select emoji -->
-
+                <br style="clear:both" />
+                <!-- Added the data-emojiable -->
+                <input class="form-control input-lg text-center" data-emoji-input="unicode" data-emojiable="false" type="text" id="setup_edit_emoji" /> <!-- turn into button to select emoji -->
+                <br style="clear:both" />
+                <br style="clear:both" />
                 <label for="setup_edit_message">
                   Write Message:
                 </label>
@@ -435,6 +441,13 @@ Pages that might become part of setup
           <script src="js/jquery.mask.min.js"></script>
           <script src="js/mustache.min.js"></script>
           <script src="js/bootstrap.min.js"></script>
+
+          <script src="assets/js/nanoscroller.min.js"></script>
+          <script src="assets/js/tether.min.js"></script>
+          <script src="assets/js/config.js"></script>
+          <script src="assets/js/util.js"></script>
+          <script src="assets/js/jquery.emojiarea.js"></script>
+          <script src="assets/js/emoji-picker.js"></script>
 
           <script type="text/javascript" src="cordova.js"></script>
           <!-- a data abstract layer ? -->
