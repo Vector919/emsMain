@@ -119,15 +119,44 @@ var app = {
     onDeviceReady: function() {
         app.loadDataObjFromDB(function(){
           if(dataOBJ.setup===true){
-                  showPage(pages.length-1);
+            setTimeout(function(){
+              showPage(pages.length-1);
+            }, 1500);
           }
           else{
+            setTimeout(function(){
+              app.gpsGetCurrentLocation();
+              app.receivedEvent('deviceready');
+            }, 1500);
             app.getContacts();
-            app.gpsGetCurrentLocation();
           }
         });
 
-        $('input[type=tel]').mask('(000) 000-0000');
+
+        //add the following library to beutify the phone number input
+        //https://github.com/jackocnr/intl-tel-input#demo-and-examples
+        /*
+        var options =  {onKeyPress: function(cep, e, field, options){
+          var masks = ['(000) 000-0000', '+000000000000000'];
+          if(cep.length === 11){mask=masks[0];}
+          else {mask = masks[1];}
+          $('input[type=tel]').mask(mask, options);
+        }};
+
+        $('input[type=tel]').mask('+000000000000000', options);
+
+        var intlTelInputOptions = {
+          geoIpLookup: function(callback) {
+            $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+              var countryCode = (resp && resp.country) ? resp.country : "";
+              callback(countryCode);
+            });
+          },
+          utilsScript: "js/utils.js"
+        };
+
+        $("input[type=tel]").intlTelInput(intlTelInputOptions);
+        */
 
         $("#contactSearch").on('input', function() {
             app.filterContacts(this.value,this);
@@ -137,7 +166,6 @@ var app = {
           $(".event.received").addClass("forceShow");
           $(".debug").addClass("forceShow");
         }
-        setTimeout(function(){app.receivedEvent('deviceready');}, 1000);
 
     },
     // Update DOM on a Received Event
@@ -182,15 +210,16 @@ var app = {
                    'Speed: '             + position.coords.speed             + '\n' +
                    'Timestamp: '         + position.timestamp                + '\n',
                    'success');
-            //if dataOBJ.coords !defined
-            dataOBJ.coords = {}; //define as obj
-            dataOBJ.coords.latitude = position.coords.latitude; //if pos.coords.lat is undefined, don't set.
-            dataOBJ.coords.longitude = position.coords.longitude; //if pos.coords.lon is undefined, don't set.
           }
           else {
             cLocal('Location found', 'success');
           }
           //set values in DB and cache
+
+          //need to add a if dataOBJ.coords !defined
+          dataOBJ.coords = {}; //define as obj
+          dataOBJ.coords.latitude = position.coords.latitude; //if pos.coords.lat is undefined, don't set.
+          dataOBJ.coords.longitude = position.coords.longitude; //if pos.coords.lon is undefined, don't set.
         };
 
         // onError Callback receives a PositionError object
@@ -226,10 +255,10 @@ var app = {
           contacts.phone = function() {
             if(this.value !== null && this.value !== ''){
               var number = this.value.toString().replace(/[_\W]+/g, "");//removes extra characters and +1 from begining of numbers
-              if(number.length>10)
-              {
-                  number = number.slice(1);
-              }
+              // if(number.length>10)
+              // {
+              //     number = number.slice(1); //only works for US phone numbers
+              // }
               return number;
             }
             else {
@@ -261,7 +290,7 @@ var app = {
 
 
           //$('#selectedContacts').html(JSON.stringify(contacts));
-            /*
+            /* initial template design
             //alert('Number of contacts: '+contacts.length);
             document.getElementById('contacts').innerHTML="";
             //push to template
@@ -345,13 +374,24 @@ var app = {
     },
 
     //select contacts
-    selectContact : function(id) {
-      //add contact to selectedContacts
-      var img = $("#"+id).find(".userImg").attr("src");
-      var name = $("#"+id).find(".userName").text();
-      var phoneNum = $("#"+id).find(".phoneNumber").val();
+    selectContact : function(id,save) {
 
-      var contact = {"img":img,"name":name,"cellphone":phoneNum, "id":id};
+      //add contact to selectedContacts
+      var img = $("#"+id).find(".userImg").attr("src"); // from the row selected
+      var name = $.trim($("#"+id).find(".userName").text()); // from the row selected
+      var phoneNum = '';
+      var contact = '';
+
+      if(save==='save') {
+        phoneNum = $("#updateNumberCellphone").val(); //get the updated number from the modal
+      }
+      else {
+        phoneNum = $("#"+id).find(".phoneNumber").val(); //get the initial number from the contacts
+      }
+      //alert(id);
+      contact = {"img":img,"name":name,"cellphone":phoneNum, "id":id}; //build the contact
+
+
       for(var i=0; i<selectedContacts.contacts.length; ++i){
         if(selectedContacts.contacts[i].cellphone===contact.cellphone)
         {
@@ -359,12 +399,21 @@ var app = {
         }
       }
       if(contact!==''){
-        selectedContacts.contacts.push(contact);
+        if(save==='save'){
+          selectedContacts.contacts.push(contact);
 
-        $('#contactSearch').val('');
-        $('#contacts').find("div.row").hide();
+          $('#contactSearch').val('');
+          $('#contacts').find("div.row").hide();
 
-        app.updateSelectedContacts();
+          app.updateSelectedContacts();
+        }
+        else {
+          //need a function to show a modal when the number is wrong (modal created $("#updateNumber") with two sub elements to be aware of $("#updateNumberLabel") and $("#updateNumberBody"))
+          $("#updateNumberLabel").html("Verify "+(name===''?'contacts':contact.name)+"'s phone number");
+          $("#updateNumberBody").html("<h4>Make sure the number includes the country code</h4><input type='tel' id='updateNumberCellphone' maxlength='16' value='"+(contact.cellphone).split(":")[0]+"' class='form-control'> ");
+          $('#updateNumber').modal();
+          $('#updateNumberSave').bind('click',function (){app.selectContact(id,'save');$('#updateNumber').modal('hide');});
+        }
       }
       //$('#selectedContacts').html(JSON.stringify(app.selectedContacts.contacts));
 
@@ -382,6 +431,7 @@ var app = {
     updateSelectedContacts : function(){
       template = $('#selectedContacts_temp').html();
       Mustache.parse(template);   // optional, speeds up future uses
+      //alert("Updated list: "+JSON.stringify(selectedContacts));
       rendered = Mustache.render(template, selectedContacts);
       $('#selectedContacts').html(rendered);
       $('html, body').animate({ scrollTop: 0 }, 'fast');
@@ -563,7 +613,7 @@ var app = {
               app.getContacts();
               app.gpsGetCurrentLocation();
               //alert(JSON.stringify(defaultMsgs.messages));
-              setTimeout(function(){if(call){call();}}, 500);
+              if(call){call();}
 
             },
             function(error){if(call){call();}console.log('Not Setup');}
@@ -596,12 +646,12 @@ var app = {
     if(DEBUG_MODE){alert("The defaultMsgs.messages["+id+"] about to be sent...");alert(defaultMsgs.messages[id]);}
     for(var i=0; i<message.contacts.length; ++i){
       var num = message.contacts[i].cellphone.split(":")[0]; //split on : grab first part of array is b/c the phone numbers are stored with :work, :home, ...ect
-      if(num.length<11){num="1"+num;}
+      //if(num.length<11){num="1"+num;}
       phonenums.push(num*1);
     }
     if(DEBUG_MODE){alert("Contacts: "+phonenums);}
     var request={
-      message:(dataOBJ.owner.username!==undefined?dataOBJ.owner.username.toString():"From a friend")+": " +
+      message:(dataOBJ.owner.username!==undefined?dataOBJ.owner.username.toString():"From a friend")+"("+dataOBJ.owner.cellnumber+"): " +
             message.msg +
             "\n Location:\n\thttps://www.google.com/maps/place/"+dataOBJ.coords.latitude+","+dataOBJ.coords.longitude+"",
 						contacts:phonenums
@@ -623,7 +673,7 @@ var app = {
             $('#response').html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was successfully sent.<br /><a href=\"#\" class=\"btn btn-danger\" onclick='app.cancelAction("+msgID+")'>Send: Actually, I'm good.</a></div>");
           }
       		else {
-      			$('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was not successfully sent.</div>");
+      			$('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Your message was not successfully sent. Edit the button and verify that the number's you are trying to contact include the correct country code.</div>");
       			if(DEBUG_MODE){
       				$('#response').html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+data+"</div>");
       			}
@@ -663,7 +713,7 @@ var app = {
     if(DEBUG_MODE){alert("The defaultMsgs.messages["+id+"] about to be sent...");alert(defaultMsgs.messages[id]);}
     for(var i=0; i<message.contacts.length; ++i){
       var num = message.contacts[i].cellphone.split(":")[0]; //split on : grab first part of array is b/c the phone numbers are stored with :work, :home, ...ect
-      if(num.length<11){num="1"+num;}
+      //if(num.length<11){num="1"+num;}
       phonenums.push(num*1);
     }
     if(DEBUG_MODE){alert("Contacts: "+phonenums);}
@@ -773,6 +823,15 @@ function updateUserPhoneNumber() {
 //EndHTMLOwnerHandling
 
 
+/*
+
+show a modal when the user selects the contact->number to use
+
+need a function to search all the buttons contacts and change the numbers when need be
+
+
+
+need a way to check when the number isn't valid (check for response codes from the services | write a service to verify the number is valid and in service)
 
 $(function() {
   // Initializes and creates emoji set from sprite sheet
@@ -786,3 +845,5 @@ $(function() {
   // It can be called as many times as necessary; previously converted input fields will not be converted again
   window.emojiPicker.discover();
 });
+
+*/

@@ -1,9 +1,8 @@
-//extract this to a file for minimization later
-$(document).ready(function() {
-  $("input[type='checkbox']").parent().click(function(){
-    $(this).toggleClass('info');
-  });
-});
+// $(document).ready(function() {
+//   $("input[type='checkbox']").parent().click(function(){
+//     $(this).toggleClass('info');
+//   });
+// });
 
 
 $('#pageTabs a').click(function (e) {

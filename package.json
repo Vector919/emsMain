@@ -1,17 +1,19 @@
 {
-  "name": "myems",
-  "version": "1.0.0",
+  "name": "hashtagEMS",
+  "version": "0.0.1",
   "description": "",
   "main": "index.html",
   "dependencies": {
     "jquery": "^2.1.0",
     "mustache": "^2.2.1",
-	"bootstrap": "^3.0.0"
+	  "bootstrap": "^3.0.0",
+    "intl-tel-input": "^9.0.9"
+
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"build": "moveLibsToWWW.bat"
+	  "build": "moveLibsToWWW.bat"
   },
   "author": "",
   "license": "ISC"
